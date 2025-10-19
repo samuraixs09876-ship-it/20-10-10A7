@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tặng Các Nàng Tiên 💌</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6f0, #ffcce0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .envelope {
+      position: relative;
+      width: 200px;
+      height: 150px;
+      background: #ff99c8;
+      cursor: pointer;
+      transition: transform 1s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #ffb3d9;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      transition: transform 1s ease;
+      transform-origin: top;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .message-box {
+      position: absolute;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      max-width: 90%;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+      color: #ff2e93;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      font-weight: bold;
+    }
+
+    .heart {
+      position: absolute;
+      top: -10px;
+      color: #ff4da6;
+      font-size: 20px;
+      animation: fall linear forwards;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="envelope" id="envelope">
+    💌
+    <div class="flap"></div>
+  </div>
+
+  <div class="message-box" id="message">
+    💖 Hôm nay 20/10 xin chúc các tiên nữ của lớp 10A7<br>
+    ngày càng xinh đẹp, học giỏi và phải hạnh phúc nhaa 💖💖💖
+  </div>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const flap = envelope.querySelector('.flap');
+    const message = document.getElementById('message');
+    let opened = false;
+
+    // Nhấn ở đâu trên lá thư cũng mở được
+    envelope.addEventListener('click', () => {
+      if (opened) return;
+      opened = true;
+      flap.style.transform = 'rotateX(180deg)';
+      setTimeout(() => {
+        envelope.classList.add('hidden');
+        message.style.opacity = '1';
+        message.style.transform = 'scale(1)';
+        startHearts();
+      }, 1000);
+    });
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = 15 + Math.random() * 25 + 'px';
+        heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
